@@ -1,6 +1,7 @@
 import itertools
 import random
 
+from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -272,6 +273,27 @@ class zono:
         for line in lines[2:]:
             values.append(list(map(float, line.split())))
         return zono(values=np.array(values))
+    
+    def show_as_image(file_name):
+        with open(file_name, 'r') as f:
+            lines = f.readlines()
+        
+        dimensions = math.sqrt(float(lines[0]))
+        if dimensions != int(dimensions):
+            raise ValueError("Dimension must be a square number")
+        
+        w, h = dimensions, dimensions
+        data = np.zeros((h, w), dtype=np.uint8)
+        
+        for num,line in enumerate(lines[2:]):
+            value = line.split()[0]
+            row = int(num/h)
+            column = num % h
+            data[row,column] = value
+
+        img = Image.fromarray(data, 'L')
+        img.save('my.png')
+        img.show()
 
 if __name__ == "__main__":
     z = zono.from_file("src/test.txt")
