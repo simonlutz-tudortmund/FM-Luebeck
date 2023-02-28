@@ -288,7 +288,8 @@ class zono:
         
         for num,line in enumerate(lines[2:]):
             value = list(map(float, line.split()))[0]
-            row = int(num/h)
+            print(float(num))
+            row = int(float(num)/h)
             column = num % h
             data[row,column] = value
 
