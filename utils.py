@@ -35,6 +35,16 @@ def load_data_iris():
 
     return names, feature_names, X, y, X_scaled, X_train, X_test, y_train, y_test
 
+def predict(X, model):
+    model.eval()
+    with torch.no_grad():
+        X = Variable(torch.from_numpy(X)).float()
+        X = X.to(device)
+        pred = model(X)
+        pred = pred.argmax(1)
+        pred = pred.cpu().detach().numpy()
+    return pred 
+
 def load_data_mnist():
     training_data = datasets.MNIST(
         root="data",
