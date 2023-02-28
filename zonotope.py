@@ -287,7 +287,7 @@ class zono:
         data = np.zeros((h, w), dtype=np.uint8)
         
         for num,line in enumerate(lines[2:]):
-            value = line.split()[0]
+            value = list(map(float, line.split()))[0]
             row = int(num/h)
             column = num % h
             data[row,column] = value
