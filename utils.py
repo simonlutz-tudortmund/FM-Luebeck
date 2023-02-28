@@ -1,4 +1,7 @@
 import torch
+from torch import nn
+from torch.autograd import Variable
+from tqdm import trange
 
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import StandardScaler
