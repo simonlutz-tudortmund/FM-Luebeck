@@ -8,6 +8,9 @@ from torchvision import datasets
 from torchvision.transforms import ToTensor
 from torch.utils.data import DataLoader
 
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
 def load_data_iris():
     iris = load_iris()
   
@@ -65,9 +68,6 @@ def load_data_fashionmnist():
     train_dataloader = DataLoader(training_data, batch_size=64)
   
     return train_dataloader
-
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
 
 def show_plots(names, feature_names, X, y, fixed_input = None, epsilon = None, title = '', fig = None, ax1 = None, ax2 = None):
     if fig == None:
