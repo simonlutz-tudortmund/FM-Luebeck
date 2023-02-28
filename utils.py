@@ -14,6 +14,8 @@ from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
 def load_data_iris():
     iris = load_iris()
   
