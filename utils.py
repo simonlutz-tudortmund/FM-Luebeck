@@ -16,9 +16,9 @@ def load_data_iris():
     names = iris['target_names']
     feature_names = iris['feature_names']
 
-    print(f"Shape of X (data): {X.shape}")
-    print(f"Shape of y (target): {y.shape} {y.dtype}")
-    print(f"Example of x and y pair: {X[0]} {y[0]}")
+    # print(f"Shape of X (data): {X.shape}")
+    # print(f"Shape of y (target): {y.shape} {y.dtype}")
+    # print(f"Example of x and y pair: {X[0]} {y[0]}")
 
     # Scale data to have mean 0 and variance 1
     scaler = StandardScaler()
@@ -30,8 +30,8 @@ def load_data_iris():
     X_train, X_test, y_train, y_test = train_test_split(
     X_scaled, y, test_size=0.2, random_state=2)
 
-    print("Shape of training set X", X_train.shape)
-    print("Shape of test set X", X_test.shape)
+    # print("Shape of training set X", X_train.shape)
+    # print("Shape of test set X", X_test.shape)
 
     return names, feature_names, X, y, X_scaled, X_train, X_test, y_train, y_test
 
@@ -65,4 +65,49 @@ def load_data_fashionmnist():
     train_dataloader = DataLoader(training_data, batch_size=64)
   
     return train_dataloader
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+def show_plots(names, feature_names, X, y, fixed_input = None, epsilon = None, title = '', fig = None, ax1 = None, ax2 = None):
+    if fig == None:
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+    fig.suptitle(title, fontsize=16)
+    for target, target_name in enumerate(names):
+        X_plot = X[y == target]
+        ax1.plot(X_plot[:, 0], X_plot[:, 1], 
+                linestyle='none', 
+                marker='o', 
+                label=target_name)
+    ax1.set_xlabel(feature_names[0])
+    ax1.set_ylabel(feature_names[1])
+    ax1.axis('equal')
+    ax1.legend()
+
+    for target, target_name in enumerate(names):
+        X_plot = X[y == target]
+        ax2.plot(X_plot[:, 2], X_plot[:, 3], 
+                linestyle='none', 
+                marker='o', 
+                label=target_name)
+    ax2.set_xlabel(feature_names[2])
+    ax2.set_ylabel(feature_names[3])
+    ax2.axis('equal')
+    ax2.legend()
+
+    if fixed_input is not None and epsilon is not None:
+    #add rectangle to plot -> shows infinity norm 
+        ax1.add_patch(Rectangle((fixed_input[0] - epsilon, fixed_input[1] - epsilon), 
+                                2*epsilon, 2*epsilon, 
+                                edgecolor='red',
+                                facecolor='none',      
+                                lw=4))
+        ax1.set_aspect("equal", adjustable="datalim")
+
+        ax2.add_patch(Rectangle((fixed_input[2]-epsilon, fixed_input[3]-epsilon), 
+                                2*epsilon, 2*epsilon, 
+                                edgecolor='red',
+                                facecolor='none',      
+                                lw=4))
+        ax2.set_aspect("equal", adjustable="datalim")
 
