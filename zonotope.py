@@ -283,7 +283,7 @@ class zono:
         if dimensions != int(dimensions):
             raise ValueError("Dimension must be a square number")
         
-        w, h = dimensions, dimensions
+        w, h = int(dimensions), int(dimensions)
         data = np.zeros((h, w), dtype=np.uint8)
         
         for num,line in enumerate(lines[2:]):
