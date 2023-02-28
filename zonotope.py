@@ -285,7 +285,6 @@ class zono:
         
         w, h = int(dimensions), int(dimensions)
         data = np.zeros((h, w), dtype=np.uint8)
-        print(len(lines))
         
         for num,line in enumerate(lines[2:]):
             value = list(map(float, line.split()))[0]
