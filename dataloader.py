@@ -6,7 +6,7 @@ from torchvision import datasets
 from torchvision.transforms import ToTensor
 from torch.utils.data import DataLoader
 
-def load_iris():
+def load_data_iris():
   iris = load_iris()
   
   X = iris['data']
@@ -33,7 +33,7 @@ def load_iris():
 
   return names, feature_names, X, y, X_scaled, X_train, X_test, y_train, y_test
 
-def load_mnist():
+def load_data_mnist():
   training_data = datasets.MNIST(
         root="data",
         train=True,
@@ -43,7 +43,7 @@ def load_mnist():
   train_dataloader = DataLoader(training_data, batch_size=64)
   return train_dataloader
  
-def load_fashionmnist():
+def load_data_fashionmnist():
   training_data = datasets.FashionMNIST(
         root="data",
         train=True,
