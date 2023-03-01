@@ -136,9 +136,9 @@ def show_perturbations(epsilon, image):
     
     for i in range(image.shape[0]):
         for j in range(image.shape[1]):
-            min_image[i][j] = image[i][j] - epsilon
-            max_image[i][j] = image[i][j] + epsilon
-            rdm_image[i][j] = image[i][j] + random.uniform(-epsilon, epsilon)
+            min_image[i][j] = min(0, max(1, image[i][j] - epsilon))
+            max_image[i][j] = min(0, max(1, image[i][j] + epsilon))
+            rdm_image[i][j] = min(0, max(1, image[i][j] + random.uniform(-epsilon, epsilon)))
     
     
     ax1.set_title('original')
