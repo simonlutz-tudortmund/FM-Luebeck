@@ -129,7 +129,7 @@ def get_image_from_marabou(vals, inputVariables):
     return adversarial_image
 
 def show_perturbations(epsilon, image):
-    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(16, 6))
     min_image = np.ndarray(image.shape)
     max_image = np.ndarray(image.shape)
     rdm_image = np.ndarray(image.shape)
