@@ -148,7 +148,7 @@ def show_perturbations(epsilon, image):
     ax3.set_title('maximal values')
     ax3.imshow(max_image,cmap='Greys', vmin=0, vmax = 1)
     ax4.set_title('random values')
-    ax4.imshow(rdm_image,cmap='gray', vmin=0, vmax = 1)
+    ax4.imshow(rdm_image,cmap='Greys', vmin=0, vmax = 1)
    
     ax1.axis('off')
     ax2.axis('off')
