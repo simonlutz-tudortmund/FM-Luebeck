@@ -11,6 +11,7 @@ from torchvision import datasets
 from torchvision.transforms import ToTensor
 from torch.utils.data import DataLoader
 
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import random
