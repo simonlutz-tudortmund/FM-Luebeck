@@ -144,11 +144,11 @@ def show_perturbations(epsilon, image):
     ax1.set_title('original')
     ax1.imshow(image,cmap='gray')
     ax2.set_title('minimal values')
-    ax2.imshow(min_image,cmap='gray')
+    ax2.imshow(rdm_image,cmap='gray')
     ax3.set_title('maximal values')
     ax3.imshow(max_image,cmap='gray')
     ax4.set_title('random values')
-    ax4.imshow(rdm_image,cmap='gray')
+    ax4.imshow(min_image,cmap='gray')
    
     ax1.axis('off')
     ax2.axis('off')
