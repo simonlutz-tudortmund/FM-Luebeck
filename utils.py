@@ -156,3 +156,8 @@ def show_perturbations(epsilon, image):
     ax4.axis('off')
     
     plt.show()
+    
+    print(image[0][0])
+    print(min_image[0][0])
+    print(max_image[0][0])
+    
