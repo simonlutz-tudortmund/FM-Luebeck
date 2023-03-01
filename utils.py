@@ -142,6 +142,8 @@ def show_perturbations(epsilon, image):
             rdm_image[i][j] = min(0.99, max(0, image[i][j] + random.uniform(-epsilon, epsilon)))
             avg[i][j] = 0.5
     
+    avg[0][0] = 0
+    avg[27][27] = 0.99
     ax1.set_title('original')
     ax1.imshow(image,cmap='Greys')
     ax2.set_title('minimal values')
