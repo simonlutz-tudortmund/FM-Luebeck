@@ -137,21 +137,18 @@ def show_perturbations(epsilon, image):
     
     for i in range(image.shape[0]):
         for j in range(image.shape[1]):
-            min_image[i][j] = min(0.99, max(0, image[i][j] - epsilon))
-            max_image[i][j] = min(0.99, max(0, image[i][j] + epsilon))
-            rdm_image[i][j] = min(0.99, max(0, image[i][j] + random.uniform(-epsilon, epsilon)))
-            avg[i][j] = 0.5
+            min_image[i][j] = min(1, max(0, image[i][j] - epsilon))
+            max_image[i][j] = min(1, max(0, image[i][j] + epsilon))
+            rdm_image[i][j] = min(1, max(0, image[i][j] + random.uniform(-epsilon, epsilon)))
     
-    avg[0][0] = 0
-    avg[27][27] = 0.99
     ax1.set_title('original')
-    ax1.imshow(image,cmap='Greys')
-    ax2.set_title('minimal values')
-    ax2.imshow(min_image,cmap='Greys')
+    ax1.imshow(image,cmap='Greys',vmin=0, vmax = 1)
+    ax2.set_title('minimal values',vmin=0, vmax = 1)
+    ax2.imshow(min_image,cmap='Greys',vmin=0, vmax = 1)
     ax3.set_title('maximal values')
-    ax3.imshow(max_image,cmap='Greys')
+    ax3.imshow(max_image,cmap='Greys',vmin=0, vmax = 1)
     ax4.set_title('random values')
-    ax4.imshow(avg,cmap='gray')
+    ax4.imshow(rdm_image,cmap='gray',vmin=0, vmax = 1)
    
     ax1.axis('off')
     ax2.axis('off')
