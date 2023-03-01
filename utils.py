@@ -116,3 +116,12 @@ def show_plots(names, feature_names, X, y, fixed_input = None, epsilon = None, t
                                 lw=4))
         ax2.set_aspect("equal", adjustable="datalim")
 
+        
+def get_image_from_marabou(vals, inputVariables):
+    adversarial_image = [[] for _ in range(inputVariables.shape[1])]
+    for h in range(inputVariables.shape[0]):
+        for w in range(inputVariables.shape[1]):
+            adversarial_image[h].insert(w, vals[inputVariables[h][w]])
+    adversarial_image = np.array(adversarial_image)
+
+    return adversarial_image
