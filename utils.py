@@ -78,7 +78,7 @@ def load_data_fashionmnist():
 
 def show_plots(names, feature_names, X, y, fixed_input = None, epsilon = None, title = '', fig = None, ax1 = None, ax2 = None):
     if fig == None:
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 16))
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
     fig.suptitle(title, fontsize=16)
     for target, target_name in enumerate(names):
         X_plot = X[y == target]
@@ -129,7 +129,7 @@ def get_image_from_marabou(vals, inputVariables):
     return adversarial_image
 
 def show_perturbations(epsilon, image):
-    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(16, 6))
+    fig, ((ax1, ax2, ax3, ax4)) = plt.subplots(1, 4, figsize=(16, 6))
     min_image = np.ndarray(image.shape)
     max_image = np.ndarray(image.shape)
     rdm_image = np.ndarray(image.shape)
