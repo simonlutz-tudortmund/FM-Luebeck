@@ -13,6 +13,7 @@ from torch.utils.data import DataLoader
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
+import random
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -125,3 +126,32 @@ def get_image_from_marabou(vals, inputVariables):
     adversarial_image = np.array(adversarial_image)
 
     return adversarial_image
+
+def show_perturbations(epsilon, image):
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
+    min_image = np.ndarry(image.shape)
+    max_image = np.ndarray(image.shape)
+    rdm_image = np.ndarray(image.shape)
+    
+    for i in range(image.shape[0]):
+        for j in range(image.shape[1]):
+            min_image[i][j] = image[i][j] - epsilon
+            max_image[i][j] = image[i][j] + epsilon
+            rdm_image[i][j] = image[i][j] + random.uniform(-epsilon, epsilon)
+    
+    
+    ax1.set_title('original')
+    ax1.imshow(image.reshape(28,28),cmap='gray')
+    ax2.set_title('minimal values')
+    ax2.imshow(min_image.reshape(28,28),cmap='gray')
+    ax3.set_title('maximal values')
+    ax3.imshow(max_image.reshape(28,28),cmap='gray')
+    ax4.set_title('random values')
+    ax4.imshow(rdm_image.reshape(28,28),cmap='gray')
+   
+    ax1.axis('off')
+    ax2.axis('off')
+    ax3.axis('off')
+    ax4.axis('off')
+    
+    plt.show()
