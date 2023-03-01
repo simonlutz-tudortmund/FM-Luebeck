@@ -118,7 +118,6 @@ def show_plots(names, feature_names, X, y, fixed_input = None, epsilon = None, t
                                 lw=4))
         ax2.set_aspect("equal", adjustable="datalim")
 
-        
 def get_image_from_marabou(vals, inputVariables):
     adversarial_image = [[] for _ in range(inputVariables.shape[1])]
     for h in range(inputVariables.shape[0]):
@@ -137,18 +136,18 @@ def show_perturbations(epsilon, image):
     
     for i in range(image.shape[0]):
         for j in range(image.shape[1]):
-            min_image[i][j] = min(1, max(0, image[i][j] - epsilon))
-            max_image[i][j] = min(1, max(0, image[i][j] + epsilon))
-            rdm_image[i][j] = min(1, max(0, image[i][j] + random.uniform(-epsilon, epsilon)))
+            min_image[i][j] = min(1.5, max(-0.5, image[i][j] - epsilon))
+            max_image[i][j] = min(1.5, max(-0.5, image[i][j] + epsilon))
+            rdm_image[i][j] = min(1.5, max(-0.5, image[i][j] + random.uniform(-epsilon, epsilon)))
     
     ax1.set_title('original')
-    ax1.imshow(image,cmap='Greys', vmin=0, vmax = 1)
+    ax1.imshow(image,cmap='viridis', vmin=-0.5, vmax = 1.5)
     ax2.set_title('minimal values')
-    ax2.imshow(min_image,cmap='Greys', vmin=0, vmax = 1)
+    ax2.imshow(min_image,cmap='viridis', vmin=-0.5, vmax = 1.5)
     ax3.set_title('maximal values')
-    ax3.imshow(max_image,cmap='Greys', vmin=0, vmax = 1)
+    ax3.imshow(max_image,cmap='viridis', vmin=-0.5, vmax = 1.5)
     ax4.set_title('random values')
-    ax4.imshow(rdm_image,cmap='Greys', vmin=0, vmax = 1)
+    ax4.imshow(rdm_image,cmap='viridis', vmin=-0.5, vmax = 1.5)
    
     ax1.axis('off')
     ax2.axis('off')
