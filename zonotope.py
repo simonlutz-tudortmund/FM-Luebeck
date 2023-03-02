@@ -2,7 +2,6 @@ import itertools
 import random
 import math
 
-from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -284,16 +283,50 @@ class zono:
             raise ValueError("Dimension must be a square number")
         
         w, h = int(dimensions), int(dimensions)
-        data = np.zeros((h, w), dtype=np.uint8)
+        data = np.ndarray((h, w))
+        min_data = np.ndarray((h, w))
+        max_data = np.ndarray((h, w))
+        
+        min_val = 0
+        max_val = 1
         
         for num,line in enumerate(lines[2:]):
             value = list(map(float, line.split()))[0]
             row = int(float(num)/h)
             column = num % h
-            data[row][column] = value * 255
+            data[row][column] = value
+            min_data[row][column] = value
+            max_data[row][column] = value
+            
+            for i in list(map(float, line.split()))[1:]:
+                if i < 0:
+                    min_data[row][column] += i
+                    max_data[row][column] -= i
+                else:
+                    min_data[row][column] -= i
+                    max_data[row][column] += i
+                    
+            if min_data[row][column] < min_val:
+                min_val = min_data[row][column]
+            
+            if max_data[row][column] > max_val:
+                max_val = max_data[row][column]
+                    
+        fig, ((ax1, ax2, ax3)) = plt.subplots(1, 3, figsize=(16, 6))
+        
+        ax1.set_title('original')
+        ax1.imshow(data,cmap='Greys', vmin=min_val, vmax=max_val)
+        ax2.set_title('minimal values')
+        ax2.imshow(min_data,cmap='Greys', vmin=min_val, vmax=max_val)
+        ax3.set_title('maximal values')
+        ax3.imshow(max_data,cmap='Greys', vmin=min_val, vmax=max_val)
+    
+        ax1.axis('off')
+        ax2.axis('off')
+        ax3.axis('off')
+    
+        plt.show()
 
-        img = Image.fromarray(data, 'L')
-        img.show()
 
 if __name__ == "__main__":
     z = zono.from_file("src/test.txt")
