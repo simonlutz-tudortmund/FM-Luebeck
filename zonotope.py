@@ -284,16 +284,17 @@ class zono:
             raise ValueError("Dimension must be a square number")
         
         w, h = int(dimensions), int(dimensions)
+        print(w,h)
         data = np.zeros((h, w), dtype=np.uint8)
         
         for num,line in enumerate(lines[2:]):
             value = list(map(float, line.split()))[0]
             row = int(float(num)/h)
             column = num % h
-            data[row,column] = value
+            data[row][column] = value
+            print(data[row][column])
 
         img = Image.fromarray(data, 'L')
-        img.save('my.png')
         img.show()
 
 if __name__ == "__main__":
