@@ -128,26 +128,28 @@ def get_image_from_marabou(vals, inputVariables):
     return adversarial_image
 
 def show_perturbations(epsilon, image):
+    min_val = 0 - epsilon
+    max_val = 1 + epsilon
+    
     fig, ((ax1, ax2, ax3, ax4)) = plt.subplots(1, 4, figsize=(16, 6))
     min_image = np.ndarray(image.shape)
     max_image = np.ndarray(image.shape)
     rdm_image = np.ndarray(image.shape)
-    avg = np.ndarray(image.shape)
     
     for i in range(image.shape[0]):
         for j in range(image.shape[1]):
-            min_image[i][j] = min(1.5, max(-0.5, image[i][j] - epsilon))
-            max_image[i][j] = min(1.5, max(-0.5, image[i][j] + epsilon))
-            rdm_image[i][j] = min(1.5, max(-0.5, image[i][j] + random.uniform(-epsilon, epsilon)))
+            min_image[i][j] = image[i][j] - epsilon
+            max_image[i][j] = image[i][j] + epsilon
+            rdm_image[i][j] = image[i][j] + random.uniform(-epsilon, epsilon)
     
     ax1.set_title('original')
-    ax1.imshow(image,cmap='Greys', vmin=-0.5, vmax = 1.5)
+    ax1.imshow(image,cmap='Greys', vmin=min_val, vmax=max_val)
     ax2.set_title('minimal values')
-    ax2.imshow(min_image,cmap='Greys', vmin=-0.5, vmax = 1.5)
+    ax2.imshow(min_image,cmap='Greys', vmin=min_val, vmax=max_val)
     ax3.set_title('maximal values')
-    ax3.imshow(max_image,cmap='Greys', vmin=-0.5, vmax = 1.5)
+    ax3.imshow(max_image,cmap='Greys', vmin=min_val, vmax=max_val)
     ax4.set_title('random values')
-    ax4.imshow(rdm_image,cmap='Greys', vmin=-0.5, vmax = 1.5)
+    ax4.imshow(rdm_image,cmap='Greys', vmin=min_val, vmax=max_val)
    
     ax1.axis('off')
     ax2.axis('off')
