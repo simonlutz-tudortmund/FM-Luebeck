@@ -290,9 +290,7 @@ class zono:
             value = list(map(float, line.split()))[0]
             row = int(float(num)/h)
             column = num % h
-            data[row][column] = value
-            print(row, column)
-            print(value)
+            data[row][column] = value * 255
 
         img = Image.fromarray(data, 'L')
         img.show()
